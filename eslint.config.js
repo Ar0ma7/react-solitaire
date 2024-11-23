@@ -33,6 +33,10 @@ export default tseslint.config(
 			react
 		},
 		rules: {
+			'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
+			'no-console': 'error',
+			'react/prop-types': 'off',
+			'react/no-unknown-property': ['error', { ignore: ['css'] }],
 			...reactHooks.configs.recommended.rules,
 			'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
 			'import/no-duplicates': ['error'],
