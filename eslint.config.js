@@ -38,6 +38,10 @@ export default tseslint.config(
 			'react/prop-types': 'off',
 			'react/no-unknown-property': ['error', { ignore: ['css'] }],
 			...reactHooks.configs.recommended.rules,
+			'react-hooks/exhaustive-deps': [
+				'warn',
+				{ enableDangerousAutofixThisMayCauseInfiniteLoops: true }
+			],
 			'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
 			'import/no-duplicates': ['error'],
 			'import/no-namespace': ['error'],
