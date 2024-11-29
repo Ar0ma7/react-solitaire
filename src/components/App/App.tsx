@@ -1,5 +1,10 @@
-import './App.css';
+import { styles } from './App.css';
+import { BoardContainer } from '@/components/Board';
 
-export function App() {
-	return <></>;
-}
+export const App: React.FC = () => {
+	return (
+		<div className={styles.container}>
+			<BoardContainer />
+		</div>
+	);
+};
