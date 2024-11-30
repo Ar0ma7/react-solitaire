@@ -3,7 +3,7 @@ import bg from '@/assets/images/bg.png';
 
 export const styles = {
 	container: style({
-		backgroundImage: bg,
+		backgroundImage: `url(${bg})`,
 		minHeight: '100vh'
 	})
 };
