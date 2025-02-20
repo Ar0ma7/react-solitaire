@@ -13,6 +13,7 @@ export const FOUNDATION_SUITE_ORDER = [SUITE.HEART, SUITE.DIAMOND, SUITE.CLUB, S
 
 export const AREA = {
 	DECK: 'deck',
+	FACE_UP: 'faceUp',
 	FIELDS: 'fields',
 	FOUNDATIONS: 'foundations'
 };
