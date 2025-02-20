@@ -41,9 +41,9 @@ export const Board: React.FC<Props> = ({
 			</div>
 			<div className={styles.row} style={{ '--column-size': FIELD_COLUMN } as React.CSSProperties}>
 				{fields.map((field, columnIndex) => (
-					<div key={columnIndex}>
+					<div key={columnIndex} className={styles.field}>
 						{field.map((card, index) => (
-							<div key={index} className={styles.cardWrapper}>
+							<div key={index} className={styles.cardWrapper} style={{ top: `${index * 5}%` }}>
 								<Card {...card} />
 							</div>
 						))}

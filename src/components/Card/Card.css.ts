@@ -4,6 +4,7 @@ export const styles = {
 	img: style({
 		display: 'block',
 		width: '100%',
-		height: 'auto'
+		height: 'auto',
+		userSelect: 'none'
 	})
 };
