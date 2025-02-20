@@ -10,7 +10,7 @@ type Props = {
 
 export const Card: React.FC<Props> = ({ suite, number, isFront }) => {
 	const image = useMemo(
-		() => (isFront ? cardImage[suite][number] : backImg),
+		() => (isFront ? cardImage[suite][number - 1] : backImg),
 		[isFront, number, suite]
 	);
 
