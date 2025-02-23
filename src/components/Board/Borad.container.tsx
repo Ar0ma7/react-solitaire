@@ -5,9 +5,9 @@ import { state } from '@/store';
 import { actions } from '@/store/store';
 
 export const BoardContainer: React.FC = () => {
-	const snap = useSnapshot(state);
+	const snapState = useSnapshot(state);
 
-	const isEmptyDeck = snap.deck.length === 0;
+	const isEmptyDeck = snapState.deck.length === 0;
 
 	const handleClickDeck = useCallback(() => {
 		actions.draw();
@@ -16,9 +16,9 @@ export const BoardContainer: React.FC = () => {
 	return (
 		<Board
 			isEmptyDeck={isEmptyDeck}
-			faceUp={snap.faceUp}
-			fields={snap.fields}
-			foundations={snap.foundations}
+			faceUp={snapState.faceUp}
+			fields={snapState.fields}
+			foundations={snapState.foundations}
 			onClickDeck={handleClickDeck}
 		/>
 	);

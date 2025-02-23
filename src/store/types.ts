@@ -6,4 +6,5 @@ export type State = {
 	faceUpHistory: Card[];
 	fields: Card[][];
 	foundations: Card[][];
+	movingCardList: Card[];
 };

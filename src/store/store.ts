@@ -3,6 +3,7 @@ import { deepClone } from 'valtio/utils';
 import { State } from './types';
 import { DRAW_COUNT, FIELD_COLUMN } from '@/constants';
 import { Card } from '@/types';
+import { getArrayFromIndex, getIndexOfElement } from '@/utils/array';
 import { getShuffledDeck } from '@/utils/feature/deck';
 
 const initialState: State = {
@@ -10,15 +11,13 @@ const initialState: State = {
 	faceUp: [],
 	faceUpHistory: [],
 	fields: [...new Array(FIELD_COLUMN).fill([])],
-	foundations: [...new Array(4).fill([])]
+	foundations: [...new Array(4).fill([])],
+	movingCardList: []
 };
 
 export const state = proxy<State>(deepClone(initialState));
 
 export const actions = {
-	replace: (updateState: Partial<State>) => {
-		Object.assign(state, updateState);
-	},
 	reset: () => {
 		Object.assign(state, deepClone(initialState));
 	},
@@ -60,5 +59,17 @@ export const actions = {
 			state.faceUp = [];
 			state.faceUpHistory = [];
 		}
+	},
+	moveFromField: (areaIndex: number, card: Card) => {
+		const field = state.fields[areaIndex];
+		const cardIndex = getIndexOfElement(field, card);
+		const movingCardList = getArrayFromIndex(field, cardIndex);
+
+		state.movingCardList = movingCardList;
+		state.fields[areaIndex] = field.slice(0, cardIndex);
+	},
+	moveToField: (areaIndex: number) => {
+		state.fields[areaIndex] = [...state.fields[areaIndex], ...state.movingCardList];
+		state.movingCardList = [];
 	}
 };
