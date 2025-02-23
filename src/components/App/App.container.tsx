@@ -1,82 +1,74 @@
-import {
-	Active,
-	DndContext,
-	DragEndEvent,
-	MouseSensor,
-	Over,
-	useSensor,
-	useSensors
-} from '@dnd-kit/core';
+import { DndContext, DragEndEvent, MouseSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { useCallback, useLayoutEffect } from 'react';
 import { snapshot } from 'valtio';
 import { App } from './App';
 import { AREA } from '@/constants';
-import { actions, state } from '@/store/store';
-import { Card } from '@/types';
-import { validateMove } from '@/utils/feature/validate';
+import { actions, state } from '@/store';
+import { validateMoveToField, validateMoveToFoundation } from '@/utils/feature/validate';
 
 export const AppContainer: React.FC = () => {
 	const sensors = useSensors(useSensor(MouseSensor, { activationConstraint: { distance: 5 } }));
 
-	const getIsValidMove = useCallback((active: Active, over: Over) => {
-		const snapState = snapshot(state);
-		const field = snapState.fields[over.data.current?.areaIndex];
-		const foundation = snapState.foundations[over.data.current?.areaIndex];
-
-		let overAreaFrontCard: Card | undefined = undefined;
-		let isEmpty: boolean = false;
-
-		switch (over?.data.current?.area) {
-			case AREA.FIELDS:
-				if (field.length === 0) {
-					isEmpty = true;
-				} else {
-					overAreaFrontCard = field[field.length - 1];
-				}
-				break;
-			case AREA.FOUNDATIONS:
-				if (foundation.length === 0) {
-					isEmpty = true;
-				} else {
-					overAreaFrontCard = foundation[foundation.length - 1];
-				}
-				break;
-		}
-
-		if (isEmpty) return true;
-		if (!overAreaFrontCard) return;
-
-		const isValidMove = validateMove(
-			{ suite: active.data.current?.suite, number: active.data.current?.number, isFront: true },
-			overAreaFrontCard
-		);
-
-		return isValidMove;
-	}, []);
-
-	const handleDragEnd = (event: DragEndEvent) => {
+	const handleDragEnd = useCallback((event: DragEndEvent) => {
 		const { active, over } = event;
+		console.log({ active, over });
 
 		if (!active || !over) return;
 
-		const isValidMove = getIsValidMove(active, over);
-
-		if (!isValidMove) return;
-
 		switch (active.data.current?.area) {
 			case AREA.FIELDS:
-				actions.moveFromField(active.data.current?.areaIndex, {
-					suite: active.data.current?.suite,
-					number: active.data.current?.number,
-					isFront: true
-				});
-				actions.moveToField(over.data.current?.areaIndex);
+				actions.moveFromField(active.data.current?.areaIndex, active.data.current.card);
 				break;
-			// case AREA.FOUNDATIONS:
-			// 	actions.removeFoundationCard(active.data.current?.areaIndex);
-			// 	break;
 		}
-	};
+
+		let isValidMove: boolean = false;
+
+		switch (over.data.current?.area) {
+			case AREA.FIELDS:
+				if (
+					validateMoveToField({
+						movingCard: active.data.current?.card,
+						fieldCard: over.data.current.fieldCard
+					})
+				)
+					isValidMove = true;
+				break;
+			case AREA.FOUNDATIONS: {
+				const movingCardSnap = snapshot(state.movingCardList);
+
+				if (
+					movingCardSnap.length === 1 &&
+					validateMoveToFoundation({
+						movingCard: active.data.current?.card,
+						foundationCard: over.data.current.foundationCard,
+						foundationSuite: over.data.current.foundationSuite
+					})
+				)
+					isValidMove = true;
+				break;
+			}
+		}
+
+		if (isValidMove) {
+			switch (over.data.current?.area) {
+				case AREA.FIELDS:
+					actions.moveToField(over.data.current?.areaIndex);
+					break;
+				case AREA.FOUNDATIONS:
+					actions.moveToFoundation(over.data.current?.areaIndex);
+					break;
+			}
+		} else {
+			switch (active.data.current?.area) {
+				case AREA.FIELDS:
+					actions.moveToField(active.data.current?.areaIndex);
+					break;
+				case AREA.FOUNDATIONS:
+					actions.moveToFoundation(active.data.current?.areaIndex);
+					break;
+			}
+		}
+	}, []);
 
 	useLayoutEffect(() => {
 		actions.setInitialField();

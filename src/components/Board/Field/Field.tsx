@@ -12,7 +12,7 @@ type FieldProps = {
 export const Field: React.FC<FieldProps> = ({ areaIndex, field }) => {
 	const { setNodeRef } = useDroppable({
 		id: `field-${areaIndex}`,
-		data: { area: AREA.FIELDS, areaIndex }
+		data: { area: AREA.FIELDS, areaIndex, fieldCard: field[field.length - 1] }
 	});
 
 	return (

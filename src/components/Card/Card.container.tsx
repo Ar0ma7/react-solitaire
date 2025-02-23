@@ -4,7 +4,7 @@ import { snapshot } from 'valtio';
 import { Card } from './Card';
 import { backImg, cardImage } from './images';
 import { AREA } from '@/constants';
-import { actions, state } from '@/store/store';
+import { actions, state } from '@/store';
 import { AreaName } from '@/types';
 
 type Props = {
@@ -31,8 +31,11 @@ export const CardContainer: React.FC<Props> = ({
 		data: {
 			area,
 			areaIndex,
-			suite,
-			number
+			card: {
+				suite,
+				number,
+				isFront
+			}
 		},
 		disabled: disableDrag
 	});

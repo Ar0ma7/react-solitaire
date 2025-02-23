@@ -1,8 +1,7 @@
 import { useCallback } from 'react';
 import { useSnapshot } from 'valtio';
 import { Board } from './Board';
-import { state } from '@/store';
-import { actions } from '@/store/store';
+import { state, actions } from '@/store';
 
 export const BoardContainer: React.FC = () => {
 	const snapState = useSnapshot(state);

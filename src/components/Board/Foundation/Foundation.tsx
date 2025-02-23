@@ -1,8 +1,9 @@
 import { useDroppable } from '@dnd-kit/core';
-import { styles } from '../Board.css';
+import { useMemo } from 'react';
+import { styles } from './Foundation.css';
 import { Card } from '@/components/Card';
 import { CardSkeleton } from '@/components/CardSkeleton';
-import { AREA } from '@/constants';
+import { AREA, FOUNDATION_SUITE_ORDER } from '@/constants';
 import { Card as CardType } from '@/types';
 
 type FoundationProps = {
@@ -11,21 +12,25 @@ type FoundationProps = {
 };
 
 export const Foundation: React.FC<FoundationProps> = ({ foundation, areaIndex }) => {
+	const foundationSuite = useMemo(() => FOUNDATION_SUITE_ORDER[areaIndex], [areaIndex]);
+
 	const { setNodeRef } = useDroppable({
-		id: `foundation-${areaIndex}`
+		id: `foundation-${areaIndex}`,
+		data: {
+			area: AREA.FOUNDATIONS,
+			areaIndex,
+			foundationCard: foundation[foundation.length - 1],
+			foundationSuite
+		}
 	});
 
 	return (
-		<div ref={setNodeRef} className={styles.foundation}>
+		<div ref={setNodeRef} className={styles.container}>
 			{foundation.length ? (
 				foundation.map((card, index) => (
-					<Card
-						area={AREA.FOUNDATIONS}
-						areaIndex={areaIndex}
-						selfIndex={index}
-						key={index}
-						{...card}
-					/>
+					<div key={index} className={styles.cardWrapper}>
+						<Card area={AREA.FOUNDATIONS} areaIndex={areaIndex} selfIndex={index} {...card} />
+					</div>
 				))
 			) : (
 				<CardSkeleton />
