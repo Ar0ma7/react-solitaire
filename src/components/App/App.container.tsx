@@ -20,24 +20,30 @@ export const AppContainer: React.FC = () => {
 
 	const getIsValidMove = useCallback((active: Active, over: Over) => {
 		const snapState = snapshot(state);
+		const field = snapState.fields[over.data.current?.areaIndex];
+		const foundation = snapState.foundations[over.data.current?.areaIndex];
 
 		let overAreaFrontCard: Card | undefined = undefined;
+		let isEmpty: boolean = false;
 
 		switch (over?.data.current?.area) {
 			case AREA.FIELDS:
-				overAreaFrontCard =
-					snapState.fields[over.data.current?.areaIndex][
-						snapState.fields[over.data.current?.areaIndex].length - 1
-					];
+				if (field.length === 0) {
+					isEmpty = true;
+				} else {
+					overAreaFrontCard = field[field.length - 1];
+				}
 				break;
 			case AREA.FOUNDATIONS:
-				overAreaFrontCard =
-					snapState.foundations[over.data.current?.areaIndex][
-						snapState.foundations[over.data.current?.areaIndex].length - 1
-					];
+				if (foundation.length === 0) {
+					isEmpty = true;
+				} else {
+					overAreaFrontCard = foundation[foundation.length - 1];
+				}
 				break;
 		}
 
+		if (isEmpty) return true;
 		if (!overAreaFrontCard) return;
 
 		const isValidMove = validateMove(
