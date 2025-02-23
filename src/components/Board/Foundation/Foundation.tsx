@@ -19,7 +19,13 @@ export const Foundation: React.FC<FoundationProps> = ({ foundation, areaIndex })
 		<div ref={setNodeRef} className={styles.foundation}>
 			{foundation.length ? (
 				foundation.map((card, index) => (
-					<Card area={AREA.FOUNDATIONS} areaIndex={areaIndex} key={index} {...card} />
+					<Card
+						area={AREA.FOUNDATIONS}
+						areaIndex={areaIndex}
+						selfIndex={index}
+						key={index}
+						{...card}
+					/>
 				))
 			) : (
 				<CardSkeleton />

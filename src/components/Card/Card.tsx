@@ -1,43 +1,25 @@
-import { useDraggable } from '@dnd-kit/core';
-import { useMemo } from 'react';
+import { DraggableAttributes } from '@dnd-kit/core';
+import { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
 import { styles } from './Card.css';
-import { backImg, cardImage } from './images';
-import { AreaName } from '@/types';
 
 type Props = {
-	area: AreaName;
-	areaIndex?: number;
-	disableDrag?: boolean;
-	suite: string;
-	number: number;
-	isFront: boolean;
+	setNodeRef: (element: HTMLElement | null) => void;
+	attributes: DraggableAttributes;
+	listeners: SyntheticListenerMap | undefined;
+	imageSrc: string;
+	onClick: () => void;
 };
 
-export const Card: React.FC<Props> = ({ area, areaIndex, disableDrag, suite, number, isFront }) => {
-	const { attributes, listeners, setNodeRef } = useDraggable({
-		id: `${suite}-${number}`,
-		data: {
-			area,
-			areaIndex,
-			suite,
-			number
-		},
-		disabled: disableDrag
-	});
-
-	const image = useMemo(
-		() => (isFront ? cardImage[suite][number - 1] : backImg),
-		[isFront, number, suite]
-	);
-
+export const Card: React.FC<Props> = ({ setNodeRef, attributes, listeners, imageSrc, onClick }) => {
 	return (
 		<img
 			ref={setNodeRef}
 			{...listeners}
 			{...attributes}
-			src={image}
+			src={imageSrc}
 			alt=""
 			className={styles.img}
+			onClick={onClick}
 		/>
 	);
 };

@@ -19,7 +19,7 @@ export const Field: React.FC<FieldProps> = ({ areaIndex, field }) => {
 		<div ref={setNodeRef} className={styles.field}>
 			{field.map((card, index) => (
 				<div key={index} className={styles.cardWrapper} style={{ top: `${index * 5}%` }}>
-					<Card area={AREA.FIELDS} areaIndex={areaIndex} {...card} />
+					<Card area={AREA.FIELDS} areaIndex={areaIndex} {...card} selfIndex={index} />
 				</div>
 			))}
 		</div>

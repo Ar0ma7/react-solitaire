@@ -1,4 +1,12 @@
-import { Active, DndContext, DragEndEvent, Over } from '@dnd-kit/core';
+import {
+	Active,
+	DndContext,
+	DragEndEvent,
+	MouseSensor,
+	Over,
+	useSensor,
+	useSensors
+} from '@dnd-kit/core';
 import { useCallback, useLayoutEffect } from 'react';
 import { snapshot } from 'valtio';
 import { App } from './App';
@@ -8,6 +16,8 @@ import { Card } from '@/types';
 import { validateMove } from '@/utils/feature/validate';
 
 export const AppContainer: React.FC = () => {
+	const sensors = useSensors(useSensor(MouseSensor, { activationConstraint: { distance: 5 } }));
+
 	const getIsValidMove = useCallback((active: Active, over: Over) => {
 		const snapState = snapshot(state);
 
@@ -71,7 +81,7 @@ export const AppContainer: React.FC = () => {
 	}, []);
 
 	return (
-		<DndContext onDragEnd={handleDragEnd}>
+		<DndContext sensors={sensors} onDragEnd={handleDragEnd}>
 			<App />
 		</DndContext>
 	);

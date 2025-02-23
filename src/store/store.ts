@@ -71,5 +71,8 @@ export const actions = {
 	moveToField: (areaIndex: number) => {
 		state.fields[areaIndex] = [...state.fields[areaIndex], ...state.movingCardList];
 		state.movingCardList = [];
+	},
+	flipFieldCard: (areaIndex: number) => {
+		state.fields[areaIndex][state.fields[areaIndex].length - 1].isFront = true;
 	}
 };

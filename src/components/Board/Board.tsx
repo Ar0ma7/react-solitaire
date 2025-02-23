@@ -40,7 +40,7 @@ export const Board: React.FC<Props> = ({
 				<div className={styles.faceUp}>
 					{reversedFaceUp.map((card, index) => (
 						<div key={index} className={styles.cardWrapper} style={{ top: `${index * 20}%` }}>
-							<Card area={AREA.FACE_UP} {...card} />
+							<Card area={AREA.FACE_UP} selfIndex={index} {...card} />
 						</div>
 					))}
 				</div>
