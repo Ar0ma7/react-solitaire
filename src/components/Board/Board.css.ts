@@ -23,9 +23,6 @@ export const styles = {
 	faceUp: style({
 		position: 'relative'
 	}),
-	field: style({
-		position: 'relative'
-	}),
 	cardWrapper: style({
 		selectors: {
 			'&:not(:first-child)': {

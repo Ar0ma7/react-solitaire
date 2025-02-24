@@ -16,7 +16,7 @@ export const getArrayFromIndex = <T>(array: T[], index: number): T[] => {
 	return array.slice(index);
 };
 
-// 配列と配列に含まれる1つの要素を渡すとインデックスを返す関数
+// 配列と配列に含まれる1つの要素を渡すとインデックスを返す
 export const getIndexOfElement = <T>(array: T[], element: Partial<T>): number => {
 	const index = array.findIndex((item) =>
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -27,4 +27,12 @@ export const getIndexOfElement = <T>(array: T[], element: Partial<T>): number =>
 		throw new Error('Element not found in array');
 	}
 	return index;
+};
+
+// 配列からインデックスの要素を削除した配列を返す
+export const removeElementAtIndex = <T>(array: T[], index: number): T[] => {
+	if (index < 0 || index >= array.length) {
+		throw new Error('Index out of bounds');
+	}
+	return [...array.slice(0, index), ...array.slice(index + 1)];
 };

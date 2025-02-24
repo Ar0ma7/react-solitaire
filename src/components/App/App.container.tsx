@@ -8,7 +8,6 @@ import { validateMoveToField, validateMoveToFoundation } from '@/utils/feature/v
 
 export const AppContainer: React.FC = () => {
 	const sensors = useSensors(useSensor(MouseSensor, { activationConstraint: { distance: 5 } }));
-
 	const handleDragEnd = useCallback((event: DragEndEvent) => {
 		const { active, over } = event;
 		console.log({ active, over });
@@ -16,6 +15,9 @@ export const AppContainer: React.FC = () => {
 		if (!active || !over) return;
 
 		switch (active.data.current?.area) {
+			case AREA.FACE_UP:
+				actions.moveFromFaceUp();
+				break;
 			case AREA.FIELDS:
 				actions.moveFromField(active.data.current?.areaIndex, active.data.current.card);
 				break;
@@ -60,6 +62,9 @@ export const AppContainer: React.FC = () => {
 			}
 		} else {
 			switch (active.data.current?.area) {
+				case AREA.FACE_UP:
+					actions.moveToFaceUp();
+					break;
 				case AREA.FIELDS:
 					actions.moveToField(active.data.current?.areaIndex);
 					break;
@@ -68,6 +73,7 @@ export const AppContainer: React.FC = () => {
 					break;
 			}
 		}
+		console.log(snapshot(state));
 	}, []);
 
 	useLayoutEffect(() => {
