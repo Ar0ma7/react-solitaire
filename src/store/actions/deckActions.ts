@@ -28,6 +28,11 @@ const draw = (drawCount: number = DRAW_COUNT) => {
 const moveFromFaceUp = () => {
 	const movingCard = state.faceUp.shift();
 	state.movingCardList = [movingCard!];
+
+	const lastHistoryCard = state.faceUpHistory.shift();
+	if (lastHistoryCard) {
+		state.faceUp = [...state.faceUp, lastHistoryCard];
+	}
 };
 
 const moveToFaceUp = () => {
