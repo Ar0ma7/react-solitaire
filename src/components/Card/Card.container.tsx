@@ -4,7 +4,7 @@ import { snapshot } from 'valtio';
 import { Card } from './Card';
 import { backImg, cardImage } from './images';
 import { AREA } from '@/constants';
-import { actions, state } from '@/store';
+import { state } from '@/store';
 import { AreaName } from '@/types';
 
 type Props = {
@@ -53,7 +53,7 @@ export const CardContainer: React.FC<Props> = ({
 
 			if (field.length - 1 !== selfIndex) return;
 
-			actions.flipFieldCard(areaIndex!);
+			// actions.flipFieldCard(areaIndex!);
 		}
 	}, [area, areaIndex, isFront, selfIndex]);
 

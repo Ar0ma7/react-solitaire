@@ -23,8 +23,14 @@ const setInitialField = () => {
 	state.fields = fields;
 };
 
-const flipFieldCard = (areaIndex: number) => {
-	state.fields[areaIndex][state.fields[areaIndex].length - 1].isFront = true;
+const flipFieldCard = () => {
+	for (let index = 0; index < state.fields.length; index++) {
+		const field = state.fields[index];
+		const lastCard = field[field.length - 1];
+		if (lastCard && !lastCard.isFront) {
+			state.fields[index][field.length - 1] = { ...lastCard, isFront: true };
+		}
+	}
 };
 
 const moveFromField = (areaIndex: number, card: Card) => {
@@ -34,6 +40,8 @@ const moveFromField = (areaIndex: number, card: Card) => {
 
 	state.movingCardList = movingCardList;
 	state.fields[areaIndex] = field.slice(0, cardIndex);
+
+	flipFieldCard();
 };
 
 const moveToField = (areaIndex: number) => {
