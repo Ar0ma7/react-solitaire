@@ -52,6 +52,15 @@ export const AppContainer: React.FC = () => {
 		}
 
 		if (isValidMove) {
+			switch (active.data.current?.area) {
+				case AREA.FACE_UP:
+					actions.addFaceUpAfterMove();
+					break;
+				case AREA.FIELDS:
+					actions.flipFieldCard();
+					break;
+			}
+
 			switch (over.data.current?.area) {
 				case AREA.FIELDS:
 					actions.moveToField(over.data.current?.areaIndex);

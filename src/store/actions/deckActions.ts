@@ -28,7 +28,9 @@ const draw = (drawCount: number = DRAW_COUNT) => {
 const moveFromFaceUp = () => {
 	const movingCard = state.faceUp.shift();
 	state.movingCardList = [movingCard!];
+};
 
+const addFaceUpAfterMove = () => {
 	const lastHistoryCard = state.faceUpHistory.shift();
 	if (lastHistoryCard) {
 		state.faceUp = [...state.faceUp, lastHistoryCard];
@@ -43,5 +45,6 @@ const moveToFaceUp = () => {
 export const deckActions = {
 	draw,
 	moveFromFaceUp,
-	moveToFaceUp
+	moveToFaceUp,
+	addFaceUpAfterMove
 };

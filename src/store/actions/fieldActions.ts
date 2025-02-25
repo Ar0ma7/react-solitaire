@@ -40,8 +40,6 @@ const moveFromField = (areaIndex: number, card: Card) => {
 
 	state.movingCardList = movingCardList;
 	state.fields[areaIndex] = field.slice(0, cardIndex);
-
-	flipFieldCard();
 };
 
 const moveToField = (areaIndex: number) => {
@@ -52,5 +50,6 @@ const moveToField = (areaIndex: number) => {
 export const fieldActions = {
 	setInitialField,
 	moveFromField,
-	moveToField
+	moveToField,
+	flipFieldCard
 };
