@@ -27,13 +27,7 @@ const draw = (drawCount: number = DRAW_COUNT) => {
 
 const moveFromFaceUp = () => {
 	const movingCard = state.faceUp.shift();
-
-	if (movingCard) {
-		state.movingCardList = [movingCard];
-
-		// const movingCardIndex = getIndexOfElement(state.faceUpHistory, movingCard);
-		// state.faceUpHistory = removeElementAtIndex(state.faceUpHistory, movingCardIndex);
-	}
+	state.movingCardList = [movingCard!];
 };
 
 const moveToFaceUp = () => {
