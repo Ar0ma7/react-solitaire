@@ -51,7 +51,6 @@ const moveToField = (areaIndex: number) => {
 
 export const fieldActions = {
 	setInitialField,
-	flipFieldCard,
 	moveFromField,
 	moveToField
 };
