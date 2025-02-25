@@ -1,4 +1,3 @@
-import { snapshot } from 'valtio';
 import { state } from '../store';
 import { DRAW_COUNT } from '@/constants';
 import { Card } from '@/types';
@@ -22,7 +21,6 @@ const draw = (drawCount: number = DRAW_COUNT) => {
 		state.faceUp = [];
 		state.faceUpHistory = [];
 	}
-	console.log(snapshot(state));
 };
 
 const moveFromFaceUp = () => {

@@ -8,9 +8,9 @@ import { validateMoveToField, validateMoveToFoundation } from '@/utils/feature/v
 
 export const AppContainer: React.FC = () => {
 	const sensors = useSensors(useSensor(MouseSensor, { activationConstraint: { distance: 5 } }));
+
 	const handleDragEnd = useCallback((event: DragEndEvent) => {
 		const { active, over } = event;
-		console.log({ active, over });
 
 		if (!active || !over) return;
 
@@ -85,7 +85,6 @@ export const AppContainer: React.FC = () => {
 
 		actions.autoFill();
 		actions.checkWin();
-		console.log(snapshot(state));
 	}, []);
 
 	useLayoutEffect(() => {
