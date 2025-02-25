@@ -7,10 +7,9 @@ type Props = {
 	attributes: DraggableAttributes;
 	listeners: SyntheticListenerMap | undefined;
 	imageSrc: string;
-	onClick: () => void;
 };
 
-export const Card: React.FC<Props> = ({ setNodeRef, attributes, listeners, imageSrc, onClick }) => {
+export const Card: React.FC<Props> = ({ setNodeRef, attributes, listeners, imageSrc }) => {
 	return (
 		<img
 			ref={setNodeRef}
@@ -19,7 +18,6 @@ export const Card: React.FC<Props> = ({ setNodeRef, attributes, listeners, image
 			src={imageSrc}
 			alt=""
 			className={styles.img}
-			onClick={onClick}
 		/>
 	);
 };

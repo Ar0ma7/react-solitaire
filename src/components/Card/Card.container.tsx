@@ -1,16 +1,12 @@
 import { useDraggable } from '@dnd-kit/core';
-import { useCallback, useMemo } from 'react';
-import { snapshot } from 'valtio';
+import { useMemo } from 'react';
 import { Card } from './Card';
 import { backImg, cardImage } from './images';
-import { AREA } from '@/constants';
-import { state } from '@/store';
 import { AreaName } from '@/types';
 
 type Props = {
 	area: AreaName;
 	areaIndex?: number;
-	selfIndex?: number;
 	disableDrag?: boolean;
 	suite: string;
 	number: number;
@@ -20,7 +16,6 @@ type Props = {
 export const CardContainer: React.FC<Props> = ({
 	area,
 	areaIndex,
-	selfIndex,
 	disableDrag,
 	suite,
 	number,
@@ -45,25 +40,12 @@ export const CardContainer: React.FC<Props> = ({
 		[isFront, number, suite]
 	);
 
-	const handleClickCard = useCallback(() => {
-		if (area === AREA.FIELDS) {
-			if (isFront) return;
-
-			const field = snapshot(state.fields)[areaIndex!];
-
-			if (field.length - 1 !== selfIndex) return;
-
-			// actions.flipFieldCard(areaIndex!);
-		}
-	}, [area, areaIndex, isFront, selfIndex]);
-
 	return (
 		<Card
 			setNodeRef={setNodeRef}
 			listeners={listeners}
 			attributes={attributes}
 			imageSrc={imageSrc}
-			onClick={handleClickCard}
 		/>
 	);
 };

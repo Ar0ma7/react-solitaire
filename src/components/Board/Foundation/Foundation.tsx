@@ -29,7 +29,7 @@ export const Foundation: React.FC<FoundationProps> = ({ foundation, areaIndex })
 			{foundation.length ? (
 				foundation.map((card, index) => (
 					<div key={index} className={styles.cardWrapper}>
-						<Card area={AREA.FOUNDATIONS} areaIndex={areaIndex} selfIndex={index} {...card} />
+						<Card area={AREA.FOUNDATIONS} areaIndex={areaIndex} {...card} />
 					</div>
 				))
 			) : (
