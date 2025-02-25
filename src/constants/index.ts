@@ -17,3 +17,10 @@ export const AREA = {
 	FIELDS: 'fields',
 	FOUNDATIONS: 'foundations'
 };
+
+export const SUITE_SYMBOL = {
+	[SUITE.SPADE]: '♠',
+	[SUITE.CLUB]: '♣',
+	[SUITE.HEART]: '♥',
+	[SUITE.DIAMOND]: '♦'
+};

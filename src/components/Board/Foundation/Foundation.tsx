@@ -33,7 +33,7 @@ export const Foundation: React.FC<FoundationProps> = ({ foundation, areaIndex })
 					</div>
 				))
 			) : (
-				<CardSkeleton />
+				<CardSkeleton suite={foundationSuite} />
 			)}
 		</div>
 	);
