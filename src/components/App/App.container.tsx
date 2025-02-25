@@ -82,6 +82,9 @@ export const AppContainer: React.FC = () => {
 					break;
 			}
 		}
+
+		actions.autoFill();
+		actions.checkWin();
 		console.log(snapshot(state));
 	}, []);
 
