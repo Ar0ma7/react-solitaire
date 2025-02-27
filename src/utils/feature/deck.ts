@@ -1,21 +1,18 @@
 import { shuffleArray } from '../array';
-import { SUITE } from '@/constants';
-import type { CardNumber, Deck, Suite } from '@/types';
+import { FOUNDATION_SUITE_ORDER } from '@/constants';
+import type { CardNumber, Deck } from '@/types';
 
-const generateDeck = (deckNum: number = 1): Deck => {
+const generateDeck = (): Deck => {
 	const deck: Deck = [];
 
-	for (let index = 0; index < deckNum; index++) {
-		const suites: Suite[] = Object.values(SUITE);
-		for (let index = 1; index <= 13; index++) {
-			suites.forEach((suite) => {
-				deck.push({
-					number: index as CardNumber,
-					suite,
-					isFront: false
-				});
+	for (let index = 1; index <= 13; index++) {
+		FOUNDATION_SUITE_ORDER.forEach((suite) => {
+			deck.push({
+				number: index as CardNumber,
+				suite,
+				isFront: false
 			});
-		}
+		});
 	}
 
 	return deck;
