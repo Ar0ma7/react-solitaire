@@ -1,9 +1,9 @@
-import { Card } from '../Card';
+import { Card, FaceDownCard } from '../Card';
 import { CardSkeleton } from '../CardSkeleton';
 import { styles } from './Board.css';
 import { Field } from './Field/Field';
 import { Foundation } from './Foundation';
-import { AREA, FIELD_COLUMN, SUITE } from '@/constants';
+import { AREA, FIELD_COLUMN } from '@/constants';
 import { Card as CardType } from '@/types';
 import { DeepReadonly } from '@/utils/type';
 
@@ -30,13 +30,7 @@ export const Board: React.FC<Props> = ({
 			style={{ '--grid-column-size': `${FIELD_COLUMN}fr` } as React.CSSProperties}
 		>
 			<div className={styles.deck}>
-				<div onClick={onClickDeck}>
-					{isEmptyDeck ? (
-						<CardSkeleton />
-					) : (
-						<Card area={AREA.DECK} disableDrag suite={SUITE.CLUB} number={1} isFront={false} />
-					)}
-				</div>
+				<div onClick={onClickDeck}>{isEmptyDeck ? <CardSkeleton /> : <FaceDownCard />}</div>
 				<div className={styles.faceUp}>
 					{reversedFaceUp.map((card, index) => (
 						<div key={index} className={styles.cardWrapper} style={{ top: `${index * 20}%` }}>
