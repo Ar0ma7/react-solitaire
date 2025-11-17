@@ -17,8 +17,6 @@ https://react-solitaire-eight.vercel.app/
   ```
 3. Access `http://localhost:3000` with a web browser
 
-If you want to start the game over, reload the page.
-
 ## Licence
 
 [MIT](./LICENSE)
