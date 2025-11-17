@@ -1,50 +1,28 @@
-# React + TypeScript + Vite
+# React Solitaire
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<img width="1445" height="882" alt="image" src="https://github.com/user-attachments/assets/9acdc943-fbc5-4e3b-96fb-e37fdf6997b5" />
 
-Currently, two official plugins are available:
+## DEMO
+https://react-solitaire-eight.vercel.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Usage
 
-## Expanding the ESLint configuration
+1. Install npm package
+  ```
+  $ npm install
+  ```
+2. Run `npm run dev`
+  ```
+  $ npm run dev
+  ```
+3. Access `http://localhost:3000` with a web browser
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+If you want to start the game over, reload the page.
 
-- Configure the top-level `parserOptions` property like this:
+## Licence
 
-```js
-export default tseslint.config({
-	languageOptions: {
-		// other options...
-		parserOptions: {
-			project: ['./tsconfig.node.json', './tsconfig.app.json'],
-			tsconfigRootDir: import.meta.dirname
-		}
-	}
-});
-```
+[MIT](./LICENSE)
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Author
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react';
-
-export default tseslint.config({
-	// Set the react version
-	settings: { react: { version: '18.3' } },
-	plugins: {
-		// Add the react plugin
-		react
-	},
-	rules: {
-		// other rules...
-		// Enable its recommended rules
-		...react.configs.recommended.rules,
-		...react.configs['jsx-runtime'].rules
-	}
-});
-```
+[Ar0ma7](https://github.com/Ar0ma7)
